@@ -7,7 +7,7 @@ class HomeController
 {
     public function index(): Response
     {
-        $content = '<h1> Hello World! </h1>';
+        $content = '<h2> Hello World! </h2>';
 
         return new Response($content);
     }
