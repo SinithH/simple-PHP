@@ -2,30 +2,24 @@
 
 namespace Codex\Framework\Http;
 
-use FastRoute\RouteCollector;
-use function FastRoute\simpleDispatcher;
+use Codex\Framework\Routing\Router;
+use Exception;
 
-class Kernel
+readonly class Kernel
 {
+    public function __construct(private Router $router)
+    {
+    }
+
     public function handle(Request $request): Response
     {
-        $dispatcher = simpleDispatcher(function (RouteCollector $routeCollector) {
-            $routes = include BASE_PATH . '/routes/web.php';
+        try {
+            [$routeHandler, $vars] = $this->router->dispatch($request);
 
-            foreach ($routes as $route) {
-                $routeCollector->addRoute(...$route);
-            }
-        });
-
-        // Dispatch a URI, to obtain the route info
-        $routeInfo = $dispatcher->dispatch(
-            $request->getMethod(),
-            $request->getPathInfo()
-        );
-
-        [$status, [$controller, $method], $vars] = $routeInfo;
-
-        $response = (new $controller())->$method($vars);
+            $response = call_user_func_array($routeHandler, $vars);
+        } catch (Exception $exception) {
+            $response = new Response($exception->getMessage(), 400);
+        }
 
         return $response;
     }
