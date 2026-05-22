@@ -17,8 +17,10 @@ readonly class Kernel
             [$routeHandler, $vars] = $this->router->dispatch($request);
 
             $response = call_user_func_array($routeHandler, $vars);
-        } catch (Exception $exception) {
-            $response = new Response($exception->getMessage(), 400);
+        }  catch (HttpException $exception) {
+            $response = new Response($exception->getMessage(), $exception->getStatusCode());
+        }  catch (Exception $exception) {
+            $response = new Response($exception->getMessage(), 500);
         }
 
         return $response;
