@@ -3,7 +3,7 @@
 namespace Codex\Framework\Routing;
 
 use Codex\Framework\Http\HttpException;
-use Codex\Framework\Http\HttpMethodException;
+use Codex\Framework\Http\HttpMethodNotAllowedException;
 use Codex\Framework\Http\Request;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
@@ -46,7 +46,7 @@ class Router implements RouterInterface
                 return [$routeInfo[1], $routeInfo[2]];
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = implode(', ', $routeInfo[1]);
-                $e = new HttpMethodException("The allowed methods are $allowedMethods");
+                $e = new HttpMethodNotAllowedException("The allowed methods are $allowedMethods");
                 $e->setStatusCode(405);
                 throw $e;
             default:
