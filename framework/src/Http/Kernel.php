@@ -2,7 +2,7 @@
 
 namespace Codex\Framework\Http;
 
-use Codex\Framework\Routing\Router;
+use Codex\framework\Routing\Router;
 use Exception;
 
 readonly class Kernel

@@ -2,7 +2,6 @@
 
 use Codex\Framework\Http\Kernel;
 use Codex\Framework\Http\Request;
-use Codex\Framework\Http\Response;
 use Codex\Framework\Routing\Router;
 
 define('BASE_PATH', dirname(__DIR__));
