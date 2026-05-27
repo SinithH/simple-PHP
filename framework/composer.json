@@ -11,7 +11,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Codex\\framework\\": "src/"
+      "Codex\\Framework\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Codex\\Framework\\Tests\\": "tests/"
     }
   },
   "require-dev": {
