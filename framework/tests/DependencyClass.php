@@ -2,7 +2,7 @@
 
 namespace Codex\Framework\Tests;
 
-class DependancyClass
+class DependencyClass
 {
 
 }
