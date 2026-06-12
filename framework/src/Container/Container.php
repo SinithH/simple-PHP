@@ -65,7 +65,6 @@ class Container implements ContainerInterface
         /** @var ReflectionParameter $parameter */
         foreach ($reflectionParameters as $parameter) {
             $serviceType = $parameter->getType();
-            dd($serviceType);
             $service = $this->get($serviceType->getName());
 
             $classDependencies[] = $service;
